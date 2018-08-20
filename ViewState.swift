@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum ViewStateOptions : UInt {
+fileprivate enum ViewStateOptions : UInt {
     case errorState
     case loadingState
     case noDataState
@@ -59,10 +59,17 @@ class ViewState {
     }
 }
 
-class ViewStateView: UIView {
+fileprivate class ViewStateView: UIView {
+    lazy var borderView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     lazy var messageLabel: UILabel = {
         let view = UILabel()
         view.textAlignment = .center
+        view.numberOfLines = 0
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -95,35 +102,44 @@ class ViewStateView: UIView {
         
         self.actionButton.addTarget(self, action: #selector(executeAction), for: .touchUpInside)
         
-        self.addSubview(messageLabel)
-        self.addSubview(actionButton)
-        self.addSubview(stateImageView)
-        self.addSubview(loadingIndicatorView)
+        borderView.addSubview(messageLabel)
+        borderView.addSubview(actionButton)
+        borderView.addSubview(stateImageView)
+        borderView.addSubview(loadingIndicatorView)
+        self.addSubview(borderView)
         parentView.addSubview(self)
         
         NSLayoutConstraint.activate([
-            self.leadingAnchor.constraint(equalTo: parentView.leadingAnchor, constant: 20),
-            self.trailingAnchor.constraint(equalTo: parentView.trailingAnchor, constant: -20),
+            self.leadingAnchor.constraint(equalTo: parentView.leadingAnchor),
+            self.trailingAnchor.constraint(equalTo: parentView.trailingAnchor),
+            self.topAnchor.constraint(equalTo: parentView.topAnchor),
+            self.bottomAnchor.constraint(equalTo: parentView.bottomAnchor),
             self.centerXAnchor.constraint(equalTo: parentView.centerXAnchor),
-            self.centerYAnchor.constraint(equalTo: parentView.centerYAnchor, constant: -100),
+            self.centerYAnchor.constraint(equalTo: parentView.centerYAnchor),
             
-            stateImageView.topAnchor.constraint(equalTo: self.topAnchor),
-            stateImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            borderView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            borderView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            borderView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            borderView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -100),
+            
+            
+            stateImageView.topAnchor.constraint(equalTo: borderView.topAnchor),
+            stateImageView.centerXAnchor.constraint(equalTo: borderView.centerXAnchor),
             stateImageView.widthAnchor.constraint(lessThanOrEqualToConstant: 100),
             stateImageView.heightAnchor.constraint(lessThanOrEqualToConstant: 100),
             
             messageLabel.topAnchor.constraint(equalTo: stateImageView.bottomAnchor, constant: 16),
-            messageLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            messageLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            messageLabel.leadingAnchor.constraint(equalTo: borderView.leadingAnchor, constant: 16),
+            messageLabel.trailingAnchor.constraint(equalTo: borderView.trailingAnchor, constant: -16),
             
             loadingIndicatorView.bottomAnchor.constraint(equalTo: messageLabel.topAnchor, constant: -16),
-            loadingIndicatorView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            loadingIndicatorView.centerXAnchor.constraint(equalTo: borderView.centerXAnchor),
             loadingIndicatorView.widthAnchor.constraint(equalToConstant: 50),
             loadingIndicatorView.heightAnchor.constraint(equalToConstant: 50),
             
             actionButton.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 16),
-            actionButton.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            actionButton.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            actionButton.centerXAnchor.constraint(equalTo: borderView.centerXAnchor),
+            actionButton.bottomAnchor.constraint(equalTo: borderView.bottomAnchor)
             ])
     }
     
@@ -147,10 +163,12 @@ class ViewStateView: UIView {
     
     func changeUIToState(_ state: ViewStateOptions) {
         hideAll()
+        self.isHidden = false
         
         switch(state) {
         case .errorState:
             messageLabel.text = errorMessage
+            messageLabel.isHidden = false
             stateImageView.image = errorImage
             stateImageView.isHidden = false
             if actionHandler != nil {
@@ -165,6 +183,7 @@ class ViewStateView: UIView {
             }
         case .loadingState:
             messageLabel.text = self.loadingMessage
+            messageLabel.isHidden = false
             if let loading = loadingImageName {
                 stateImageView.loadGif(asset: loading)
                 stateImageView.isHidden = false
@@ -180,6 +199,7 @@ class ViewStateView: UIView {
             }
         case .noDataState:
             messageLabel.text = self.noDataMessage
+            messageLabel.isHidden = false
             stateImageView.image = noDataImage
             stateImageView.isHidden = false
             
@@ -194,8 +214,7 @@ class ViewStateView: UIView {
                 table.isScrollEnabled = false
             }
         case .initialState:
-            hideAll()
-            
+            self.isHidden = true
             if let table = parentView as? UITableView {
                 table.isScrollEnabled = true
             }
