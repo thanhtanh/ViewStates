@@ -43,9 +43,8 @@ class ViewController: UIViewController {
                 self.data = self.best
                 self.tableView.reloadData()
             case .noData:
-                self.viewState.showNoDataState("No data", actionButtonText: "RETRY")
-                self.viewState.showNoDataState("No data", noDataImage: self.noDataImage, actionButtonText: "RETRY", actionHandler: {
-                    self.loadData()
+                self.viewState.showNoDataState("There is nothing to display", noDataImage: self.noDataImage, actionButtonTitle: "CREATE ONE", actionHandler: {
+                    // create one
                 })
             case .error:
                 self.viewState.showErrorState("Oops! Something went wrong...", errorImage: self.errorImage, actionButtonTitle: "RETRY", actionHandler: {

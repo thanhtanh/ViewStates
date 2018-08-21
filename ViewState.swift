@@ -43,10 +43,11 @@ class ViewState {
         moveToState(.errorState)
     }
     
-    func showNoDataState(_ noDataMessage:String, noDataImage: UIImage? = nil, actionButtonText: String?, actionHandler: (() -> Void)? = nil) {
+    func showNoDataState(_ noDataMessage:String, noDataImage: UIImage? = nil, actionButtonTitle: String?, actionHandler: (() -> Void)? = nil) {
         stateView.noDataMessage = noDataMessage
         stateView.noDataImage = noDataImage
         stateView.actionHandler = actionHandler
+        stateView.actionButtonTitle = actionButtonTitle
         moveToState(.noDataState)
     }
     
@@ -76,7 +77,7 @@ fileprivate class ViewStateView: UIView {
     
     lazy var actionButton: UIButton = {
         let view = UIButton()
-        view.setTitle("RETRY", for: .normal)
+        view.setTitleColor(.blue, for: .normal)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
