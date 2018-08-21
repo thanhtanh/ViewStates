@@ -19,8 +19,14 @@ class ViewState {
     
     var parentView: UIView! {
         didSet {
-            self.stateView = ViewStateView(parentView: parentView)
+            self.stateView = ViewStateView(parentView: parentView, theme: ViewState.theme)
         }
+    }
+    
+    private static var theme = ViewStateTheming()
+    
+    static func useCustomeTheme(_ customTheme: ViewStateTheming) {
+        theme = customTheme
     }
     
     func showLoadingState(loadingMessage: String = "", loadingGifName: String? = nil) {
@@ -60,16 +66,32 @@ class ViewState {
     }
 }
 
+class ViewStateTheming {
+    var backgroundColor = UIColor.white
+    
+    var messageTextColor = UIColor.darkText
+    var messageTextAlignment = NSTextAlignment.center
+    var messageTextFont = UIFont.systemFont(ofSize: 15)
+    
+    var actionButtonBackgroundColor = UIColor.white
+    var actionButtonTitleColor = UIColor.blue
+    
+    var defaultLoadingSpinnerColor = UIColor.gray
+}
+
 fileprivate class ViewStateView: UIView {
     lazy var borderView: UIView = {
         let view = UIView()
+        view.backgroundColor = theme.backgroundColor
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     lazy var messageLabel: UILabel = {
         let view = UILabel()
-        view.textAlignment = .center
+        view.textColor = theme.messageTextColor
+        view.textAlignment = theme.messageTextAlignment
+        view.font = theme.messageTextFont
         view.numberOfLines = 0
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -77,7 +99,8 @@ fileprivate class ViewStateView: UIView {
     
     lazy var actionButton: UIButton = {
         let view = UIButton()
-        view.setTitleColor(.blue, for: .normal)
+        view.setTitleColor(theme.actionButtonTitleColor, for: .normal)
+        view.backgroundColor = theme.actionButtonBackgroundColor
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -90,14 +113,27 @@ fileprivate class ViewStateView: UIView {
     
     lazy var loadingIndicatorView: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView()
-        view.color = .red
+        view.color = theme.defaultLoadingSpinnerColor
         view.translatesAutoresizingMaskIntoConstraints = false
         view.startAnimating()
         return view
     }()
     
-    init(parentView: UIView) {
+    let parentView: UIView
+    let theme: ViewStateTheming
+    var loadingMessage = ""
+    var errorMessage = ""
+    var noDataMessage = ""
+    var errorImage: UIImage?
+    var noDataImage: UIImage?
+    var loadingImageName: String?
+    var actionButtonTitle: String?
+    var actionHandler: (() -> Void)?
+    
+    init(parentView: UIView, theme: ViewStateTheming) {
         self.parentView = parentView
+        self.theme = theme
+        
         super.init(frame: CGRect.zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         
@@ -147,16 +183,6 @@ fileprivate class ViewStateView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    let parentView: UIView
-    var loadingMessage = ""
-    var errorMessage = ""
-    var noDataMessage = ""
-    var errorImage: UIImage?
-    var noDataImage: UIImage?
-    var loadingImageName: String?
-    var actionButtonTitle: String?
-    var actionHandler: (() -> Void)?
     
     @objc func executeAction() {
         self.actionHandler?()
