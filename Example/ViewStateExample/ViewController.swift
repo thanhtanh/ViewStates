@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     var loadingImageAssetName: String?
     var errorImage: UIImage?
     var noDataImage: UIImage?
+    var theme: ViewStateTheming?
     
     private let best = [
         "TÌNH ĐƠN PHƯƠNG ACOUSTIC COVER - Edward Duong Nguyen Ft Tùng Acoustic",
@@ -31,6 +32,7 @@ class ViewController: UIViewController {
         
         tableView.tableFooterView = UIView()
         viewState.parentView = tableView
+        self.title = "FEEDS"
         loadData()
     }
 

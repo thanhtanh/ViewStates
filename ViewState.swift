@@ -75,6 +75,9 @@ class ViewStateTheming {
     
     var actionButtonBackgroundColor = UIColor.white
     var actionButtonTitleColor = UIColor.blue
+    var actionButtonFont = UIFont.boldSystemFont(ofSize: 15)
+    var actionButtonInset = UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 20)
+    var actionButtonCornerRadius: CGFloat = 5
     
     var defaultLoadingSpinnerColor = UIColor.gray
 }
@@ -82,7 +85,7 @@ class ViewStateTheming {
 fileprivate class ViewStateView: UIView {
     lazy var borderView: UIView = {
         let view = UIView()
-        view.backgroundColor = theme.backgroundColor
+        view.backgroundColor = .clear
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -100,8 +103,12 @@ fileprivate class ViewStateView: UIView {
     lazy var actionButton: UIButton = {
         let view = UIButton()
         view.setTitleColor(theme.actionButtonTitleColor, for: .normal)
+        view.titleLabel?.font = theme.actionButtonFont
         view.backgroundColor = theme.actionButtonBackgroundColor
+        view.contentEdgeInsets = theme.actionButtonInset
+        view.layer.cornerRadius = theme.actionButtonCornerRadius
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = true
         return view
     }()
     
@@ -136,6 +143,7 @@ fileprivate class ViewStateView: UIView {
         
         super.init(frame: CGRect.zero)
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.backgroundColor = theme.backgroundColor
         
         self.actionButton.addTarget(self, action: #selector(executeAction), for: .touchUpInside)
         
