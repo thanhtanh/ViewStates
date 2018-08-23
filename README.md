@@ -43,13 +43,15 @@ self.viewState.showNoDataState("There is nothing to display")
 ## Advance
 - Display `NoData` state with an image, and an action button:
 ``` swift
-self.viewState.showNoDataState("There is nothing to display", noDataImage: UIImage(named: "no_data", actionButtonTitle: "CREATE ONE", actionHandler: {
+self.viewState.showNoDataState("There is nothing to display", noDataImage: UIImage(named: "no_data",
+actionButtonTitle: "CREATE ONE", actionHandler: {
     // The code to open the view to create one
 }
 ```
 - Dispay `error state` with an image and a `retry` button:
-``` swif
-self.viewState.showErrorState("Oops! Something went wrong...", errorImage: UIImage(named: "error", actionButtonTitle: "RETRY", actionHandler: {
+``` swift
+self.viewState.showErrorState("Oops! Something went wrong...", errorImage: UIImage(named: "error", 
+actionButtonTitle: "RETRY", actionHandler: {
     self.loadData()
 })
 ```
