@@ -67,5 +67,33 @@ theme.actionButtonTitleColor = .white
 ViewState.useCustomeTheme(theme)
 ```
 
+These are all the properties that we can change:
+``` swift
+class ViewStateTheming {
+    // Background color of the ViewState view
+    var backgroundColor = UIColor.white
+
+    // The message label style
+    var messageTextColor = UIColor.darkText
+    var messageTextAlignment = NSTextAlignment.center
+    var messageTextFont = UIFont.systemFont(ofSize: 15)
+
+    // The action button style
+    var actionButtonBackgroundColor = UIColor.white
+    var actionButtonTitleColor = UIColor.blue
+    var actionButtonFont = UIFont.boldSystemFont(ofSize: 15)
+    var actionButtonInset = UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 20)
+    var actionButtonCornerRadius: CGFloat = 5
+
+    // If there is no GIF image, the iOS UIActivityIndicatorView will be used
+    var defaultLoadingSpinnerColor = UIColor.gray
+
+    // Default image and loading text. This can be set when changing state for a special view
+    var defaultLoadingMessage = ""
+    var defaultLoadingImageName: String?
+    var defaultErrorImage: UIImage?
+    var defaultNoDataImage: UIImage?
+}
+```
 
 
