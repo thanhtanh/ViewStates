@@ -29,10 +29,19 @@ class ViewState {
         theme = customTheme
     }
     
-    func showLoadingState(loadingMessage: String = "", loadingGifName: String? = nil) {
+    func showLoadingState() {
+        showLoadingState(loadingMessage: ViewState.theme.defaultLoadingMessage,
+                         loadingGifName: ViewState.theme.defaultLoadingImageName)
+    }
+    
+    func showLoadingState(loadingMessage: String, loadingGifName: String? = nil) {
         stateView.loadingMessage = loadingMessage
         stateView.loadingImageName = loadingGifName
         moveToState(.loadingState)
+    }
+    
+    func showErrorState(_ errorMessage: String) {
+        showErrorState(errorMessage, errorImage: ViewState.theme.defaultErrorImage)
     }
     
     func showErrorState(_ errorMessage: String, errorImage: UIImage?) {
@@ -41,7 +50,7 @@ class ViewState {
         moveToState(.errorState)
     }
     
-    func showErrorState(_ errorMessage: String, errorImage: UIImage?, actionButtonTitle: String, actionHandler: @escaping (() -> Void)) {
+    func showErrorState(_ errorMessage: String, errorImage: UIImage? = nil, actionButtonTitle: String, actionHandler: @escaping (() -> Void)) {
         stateView.errorMessage = errorMessage
         stateView.errorImage = errorImage
         stateView.actionButtonTitle = actionButtonTitle
@@ -49,7 +58,15 @@ class ViewState {
         moveToState(.errorState)
     }
     
-    func showNoDataState(_ noDataMessage:String, noDataImage: UIImage? = nil, actionButtonTitle: String?, actionHandler: (() -> Void)? = nil) {
+    func showNoDataState(_ noDataMessage: String) {
+        showNoDataState(noDataMessage, noDataImage: ViewState.theme.defaultNoDataImage, actionButtonTitle: nil, actionHandler: nil)
+    }
+    
+    func showNoDataState(_ noDataMessage: String, actionButtonTitle: String, actionHandler: @escaping (() -> Void)) {
+        showNoDataState(noDataMessage, noDataImage: ViewState.theme.defaultNoDataImage, actionButtonTitle: actionButtonTitle, actionHandler: actionHandler)
+    }
+    
+    func showNoDataState(_ noDataMessage:String, noDataImage: UIImage? = nil, actionButtonTitle: String?, actionHandler: (() -> Void)?) {
         stateView.noDataMessage = noDataMessage
         stateView.noDataImage = noDataImage
         stateView.actionHandler = actionHandler
@@ -80,6 +97,11 @@ class ViewStateTheming {
     var actionButtonCornerRadius: CGFloat = 5
     
     var defaultLoadingSpinnerColor = UIColor.gray
+    
+    var defaultLoadingMessage = ""
+    var defaultLoadingImageName: String?
+    var defaultErrorImage: UIImage?
+    var defaultNoDataImage: UIImage?
 }
 
 fileprivate class ViewStateView: UIView {
