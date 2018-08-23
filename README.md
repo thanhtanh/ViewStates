@@ -24,25 +24,39 @@ class ViewController: UIViewController {
 }
 ```
 - Display the loading state:
-```
+``` swift
 viewState.showLoadingState(loadingMessage: "Loading...")
 ```
 - When an async task complete successfully, we hide the ViewState:
-```
+``` swift
 viewState.hideViewState()
 ```
 - When an async task complete with an error, we can show the error state:
-```
+``` swift
 self.viewState.showErrorState("Oops! Something went wrong...")
 ```
-- When there are nothing to display after geting from async task, we can display the `NoData` state:
-```
+- When there is nothing to display after geting from async task, we can display the `NoData` state:
+``` swift
 self.viewState.showNoDataState("There is nothing to display")
+```
+
+## Advance
+- Display `NoData` state with an image, and an action button:
+``` swift
+self.viewState.showNoDataState("There is nothing to display", noDataImage: UIImage(named: "no_data", actionButtonTitle: "CREATE ONE", actionHandler: {
+    // The code to open the view to create one
+}
+```
+- Dispay `error state` with an image and a `retry` button:
+``` swif
+self.viewState.showErrorState("Oops! Something went wrong...", errorImage: UIImage(named: "error", actionButtonTitle: "RETRY", actionHandler: {
+    self.loadData()
+})
 ```
 
 ## Customization
 You can set the custom theme for the ViewState once for all views in the app. You can put it in `AppDelegate` or somewhere you want.
-```
+``` swift
 let theme = ViewStateTheming()
 theme.messageTextColor = .red
 theme.actionButtonBackgroundColor = .green
