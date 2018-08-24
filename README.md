@@ -2,8 +2,9 @@
 ViewStates makes it easier to create a view with loading, success, no data and error states. It also has an action button, so that we can do some action such as `navigate to other view`, or `retry` an async task. The UI can be customized easily.
 
 ## Preview
-
+<p align="center">
 ![](images/custom_theme.gif)
+</p>
 
 ## Getting started
 
