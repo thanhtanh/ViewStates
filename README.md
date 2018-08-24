@@ -3,7 +3,7 @@ ViewStates makes it easier to create a view with loading, success, no data and e
 
 ## Preview
 <p align="center">
-![](images/custom_theme.gif)
+    <img src="https://github.com/thanhtanh/ViewStates/blob/master/images/custom_theme.gif" title="ViewState preview">
 </p>
 
 ## Getting started
