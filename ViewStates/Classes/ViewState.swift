@@ -25,9 +25,7 @@ public class ViewState {
     
     private static var theme = ViewStateTheming()
     
-    public init() {
-        
-    }
+    public init() { }
     
     public static func useCustomeTheme(_ customTheme: ViewStateTheming) {
         theme = customTheme
@@ -88,29 +86,30 @@ public class ViewState {
 }
 
 public class ViewStateTheming {
+    public init() { }
     // Background color of the ViewState view
-    var backgroundColor = UIColor.white
+    public var backgroundColor = UIColor.white
     
     // The message label style
-    var messageTextColor = UIColor.darkText
-    var messageTextAlignment = NSTextAlignment.center
-    var messageTextFont = UIFont.systemFont(ofSize: 15)
+    public var messageTextColor = UIColor.darkText
+    public var messageTextAlignment = NSTextAlignment.center
+    public var messageTextFont = UIFont.systemFont(ofSize: 15)
     
     // The action button style
-    var actionButtonBackgroundColor = UIColor.white
-    var actionButtonTitleColor = UIColor.blue
-    var actionButtonFont = UIFont.boldSystemFont(ofSize: 15)
-    var actionButtonInset = UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 20)
-    var actionButtonCornerRadius: CGFloat = 5
+    public var actionButtonBackgroundColor = UIColor.white
+    public var actionButtonTitleColor = UIColor.blue
+    public var actionButtonFont = UIFont.boldSystemFont(ofSize: 15)
+    public var actionButtonInset = UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 20)
+    public var actionButtonCornerRadius: CGFloat = 5
     
     // If there is no GIF image, the iOS UIActivityIndicatorView will be used
-    var defaultLoadingSpinnerColor = UIColor.gray
+    public var defaultLoadingSpinnerColor = UIColor.gray
     
     // Default image and loading text. This can be set when changing state for a special view
-    var defaultLoadingMessage = ""
-    var defaultLoadingImageName: String?
-    var defaultErrorImage: UIImage?
-    var defaultNoDataImage: UIImage?
+    public var defaultLoadingMessage = ""
+    public var defaultLoadingImageName: String?
+    public var defaultErrorImage: UIImage?
+    public var defaultNoDataImage: UIImage?
 }
 
 fileprivate class ViewStateView: UIView {
