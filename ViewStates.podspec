@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ViewStates'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'ViewStates makes it easier to create a view with loading, success, no data and error states'
   s.swift_version = '4.0'
 
