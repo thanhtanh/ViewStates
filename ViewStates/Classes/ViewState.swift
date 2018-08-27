@@ -14,10 +14,10 @@ fileprivate enum ViewStateOptions : UInt {
     case initialState
 }
 
-class ViewState {
+public class ViewState {
     private var stateView: ViewStateView!
     
-    var parentView: UIView! {
+    public var parentView: UIView! {
         didSet {
             self.stateView = ViewStateView(parentView: parentView, theme: ViewState.theme)
         }
@@ -25,32 +25,32 @@ class ViewState {
     
     private static var theme = ViewStateTheming()
     
-    static func useCustomeTheme(_ customTheme: ViewStateTheming) {
+    public static func useCustomeTheme(_ customTheme: ViewStateTheming) {
         theme = customTheme
     }
     
-    func showLoadingState() {
+    public func showLoadingState() {
         showLoadingState(loadingMessage: ViewState.theme.defaultLoadingMessage,
                          loadingGifName: ViewState.theme.defaultLoadingImageName)
     }
     
-    func showLoadingState(loadingMessage: String, loadingGifName: String? = nil) {
+    public func showLoadingState(loadingMessage: String, loadingGifName: String? = nil) {
         stateView.loadingMessage = loadingMessage
         stateView.loadingImageName = loadingGifName
         moveToState(.loadingState)
     }
     
-    func showErrorState(_ errorMessage: String) {
+    public func showErrorState(_ errorMessage: String) {
         showErrorState(errorMessage, errorImage: ViewState.theme.defaultErrorImage)
     }
     
-    func showErrorState(_ errorMessage: String, errorImage: UIImage?) {
+    public func showErrorState(_ errorMessage: String, errorImage: UIImage?) {
         stateView.errorMessage = errorMessage
         stateView.errorImage = errorImage
         moveToState(.errorState)
     }
     
-    func showErrorState(_ errorMessage: String, errorImage: UIImage? = nil, actionButtonTitle: String, actionHandler: @escaping (() -> Void)) {
+    public func showErrorState(_ errorMessage: String, errorImage: UIImage? = nil, actionButtonTitle: String, actionHandler: @escaping (() -> Void)) {
         stateView.errorMessage = errorMessage
         stateView.errorImage = errorImage
         stateView.actionButtonTitle = actionButtonTitle
@@ -58,15 +58,15 @@ class ViewState {
         moveToState(.errorState)
     }
     
-    func showNoDataState(_ noDataMessage: String) {
+    public func showNoDataState(_ noDataMessage: String) {
         showNoDataState(noDataMessage, noDataImage: ViewState.theme.defaultNoDataImage, actionButtonTitle: nil, actionHandler: nil)
     }
     
-    func showNoDataState(_ noDataMessage: String, actionButtonTitle: String, actionHandler: @escaping (() -> Void)) {
+    public func showNoDataState(_ noDataMessage: String, actionButtonTitle: String, actionHandler: @escaping (() -> Void)) {
         showNoDataState(noDataMessage, noDataImage: ViewState.theme.defaultNoDataImage, actionButtonTitle: actionButtonTitle, actionHandler: actionHandler)
     }
     
-    func showNoDataState(_ noDataMessage:String, noDataImage: UIImage? = nil, actionButtonTitle: String?, actionHandler: (() -> Void)?) {
+    public func showNoDataState(_ noDataMessage:String, noDataImage: UIImage? = nil, actionButtonTitle: String?, actionHandler: (() -> Void)?) {
         stateView.noDataMessage = noDataMessage
         stateView.noDataImage = noDataImage
         stateView.actionHandler = actionHandler
@@ -74,7 +74,7 @@ class ViewState {
         moveToState(.noDataState)
     }
     
-    func hideViewState() {
+    public func hideViewState() {
         moveToState(.initialState)
     }
     
@@ -83,7 +83,7 @@ class ViewState {
     }
 }
 
-class ViewStateTheming {
+public class ViewStateTheming {
     // Background color of the ViewState view
     var backgroundColor = UIColor.white
     
