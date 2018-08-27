@@ -15,6 +15,9 @@ ViewStates makes it easier to create a view with loading, success, no data and e
 
 
 ## Requirements
+- iOS 8.0+
+- Xcode 9.0+
+- Swift 4.0+
 
 ## Installation
 ### Cocoapods
@@ -33,12 +36,12 @@ You just need to copy 2 files `ViewState.swift` and `UIImage+Gif.swift` in the `
 
 ``` swift
 class ViewController: UIViewController {
-let viewState = ViewState()
+    let viewState = ViewState()
 
-override func viewDidLoad() {
-super.viewDidLoad()
-viewState.parentView = self.view
-}
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        viewState.parentView = self.view
+        }
 }
 ```
 - Display the loading state:
@@ -115,7 +118,7 @@ class ViewStateTheming {
 
 ## Author
 
-thanhtanh72@gmail.com, thanhtanh72@gmail.com
+Tanh Pham (thanhtanh72@gmail.com)
 
 ## License
 
