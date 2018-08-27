@@ -1,27 +1,44 @@
 # ViewStates
+
+[![CI Status](https://img.shields.io/travis/thanhtanh72@gmail.com/ViewStates.svg?style=flat)](https://travis-ci.org/thanhtanh72@gmail.com/ViewStates)
+[![Version](https://img.shields.io/cocoapods/v/ViewStates.svg?style=flat)](https://cocoapods.org/pods/ViewStates)
+[![License](https://img.shields.io/cocoapods/l/ViewStates.svg?style=flat)](https://cocoapods.org/pods/ViewStates)
+[![Platform](https://img.shields.io/cocoapods/p/ViewStates.svg?style=flat)](https://cocoapods.org/pods/ViewStates)
+
 ViewStates makes it easier to create a view with loading, success, no data and error states. It also has an action button, so that we can do some action such as `navigate to other view`, or `retry` an async task. The UI can be customized easily.
 
 ## Preview
+
 <p align="center">
-    <img src="https://github.com/thanhtanh/ViewStates/blob/master/images/custom_theme.gif" title="ViewState preview">
+<img src="https://github.com/thanhtanh/ViewStates/blob/master/images/custom_theme.gif" title="ViewState preview">
 </p>
 
-## Getting started
 
-You just need to copy 2 files `ViewState.swift` and `UIImage+Gif.swift` to your project. For the `UIImage+Gif.swift`, I took it from this repo: https://github.com/swiftgif/SwiftGif . The purpose of this library is to animate a GIF image for the loading state. I would like to give a thank to the authors.
+## Requirements
+
+## Installation
+### Cocoapods
+ViewStates is available through [CocoaPods](https://cocoapods.org). To install it, simply add the following line to your Podfile:
+
+```ruby
+pod 'ViewStates'
+```
+
+### Manual
+You just need to copy 2 files `ViewState.swift` and `UIImage+Gif.swift` in the `ViewStates/Classes/` directory to your project. For the `UIImage+Gif.swift`, I took it from this repo: https://github.com/swiftgif/SwiftGif . The purpose of this library is to animate a GIF image for the loading state. I would like to give a thank to the authors.
 
 ## How to use
-
+### Basic usage
 - Init the ViewState, and set the view you want to display the ViewState as the `parentView` of the ViewState
 
 ``` swift
 class ViewController: UIViewController {
-    let viewState = ViewState()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        viewState.parentView = self.view
-    }
+let viewState = ViewState()
+
+override func viewDidLoad() {
+super.viewDidLoad()
+viewState.parentView = self.view
+}
 }
 ```
 - Display the loading state:
@@ -40,8 +57,7 @@ self.viewState.showErrorState("Oops! Something went wrong...")
 ``` swift
 self.viewState.showNoDataState("There is nothing to display")
 ```
-
-## Advance
+### Advance
 - Display `NoData` state with an image, and an action button:
 ``` swift
 self.viewState.showNoDataState("There is nothing to display", noDataImage: UIImage(named: "no_data",
@@ -57,7 +73,7 @@ actionButtonTitle: "RETRY", actionHandler: {
 })
 ```
 
-## Customization
+### Styling
 You can set the custom theme for the ViewState once for all views in the app. You can put it in `AppDelegate` or somewhere you want.
 ``` swift
 let theme = ViewStateTheming()
@@ -97,4 +113,10 @@ class ViewStateTheming {
 }
 ```
 
+## Author
 
+thanhtanh72@gmail.com, thanhtanh72@gmail.com
+
+## License
+
+ViewStates is available under the MIT license. See the LICENSE file for more info.
