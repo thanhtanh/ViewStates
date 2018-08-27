@@ -15,7 +15,7 @@ ViewStates makes it easier to create a view with loading, success, no data and e
 
 
 ## Requirements
-- iOS 8.0+
+- iOS 9.0+
 - Xcode 9.0+
 - Swift 4.0+
 
@@ -41,7 +41,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         viewState.parentView = self.view
-        }
+    }
 }
 ```
 - Display the loading state:

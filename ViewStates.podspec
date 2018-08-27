@@ -8,8 +8,9 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ViewStates'
-  s.version          = '0.1.0'
+  s.version          = '1.0.0'
   s.summary          = 'ViewStates makes it easier to create a view with loading, success, no data and error states'
+  s.swift_version = '4.0'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -21,14 +22,14 @@ Pod::Spec.new do |s|
 ViewStates makes it easier to create a view with loading, success, no data and error states. It also has an action button, so that we can do some action such as navigate to other view, or retry an async task. The UI can be customized easily.
                        DESC
 
-  s.homepage         = 'https://github.com/thanhtanh72@gmail.com/ViewStates'
+  s.homepage         = 'https://github.com/thanhtanh/ViewStates'
   s.screenshots     = 'https://github.com/thanhtanh/ViewStates/raw/master/images/custom_theme.gif'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'thanhtanh72@gmail.com' => 'thanhtanh72@gmail.com' }
-  s.source           = { :git => 'https://github.com/thanhtanh72@gmail.com/ViewStates.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/thanhtanh/ViewStates.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
 
   s.source_files = 'ViewStates/Classes/**/*'
   
