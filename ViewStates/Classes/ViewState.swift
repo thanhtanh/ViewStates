@@ -25,6 +25,10 @@ public class ViewState {
     
     private static var theme = ViewStateTheming()
     
+    public init() {
+        
+    }
+    
     public static func useCustomeTheme(_ customTheme: ViewStateTheming) {
         theme = customTheme
     }
